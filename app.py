@@ -4,9 +4,10 @@ import sqlite3
 import random
 import string
 import html
+import os
 
 app = Flask(__name__)
-app.secret_key = "super_secret_key_123"  # Hardcoded secret key (CWE-798)
+app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(32)
 
 def init_db():
     conn = sqlite3.connect('bank.db')
